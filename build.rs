@@ -14,17 +14,6 @@ fn main() {
         .file("vendor/pdq/cpp/downscaling/downscaling.cpp")
         .compile("pdq-cpp");
 
-    let bindings = bindgen::Builder::default()
-        .header("vendor/pdq_wrapper.h")
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
-        .generate()
-        .expect("bindgen failed");
-
-    let out_path = std::path::PathBuf::from(std::env::var("OUT_DIR").unwrap());
-    bindings
-        .write_to_file(out_path.join("pdq_bindings.rs"))
-        .expect("couldn't write bindings");
-
     println!("cargo:rerun-if-changed=vendor/pdq_wrapper.h");
     println!("cargo:rerun-if-changed=vendor/pdq_wrapper.cpp");
 }

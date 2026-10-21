@@ -20,3 +20,15 @@ cp -r ThreatExchange/pdq/cpp/common vendor/pdq/cpp/
 cp -r ThreatExchange/pdq/cpp/downscaling vendor/pdq/cpp/
 cp -r ThreatExchange/pdq/cpp/hashing vendor/pdq/cpp/
 echo "Updated vendor/pdq/cpp with latest from ThreatExchange/pdq/cpp"
+
+# Regenerate committed bindings if bindgen-cli is available
+if command -v bindgen &> /dev/null; then
+  bindgen vendor/pdq_wrapper.h \
+    --allowlist-type 'PdqHash256' \
+    --allowlist-function 'pdq_.*' \
+    --use-core \
+    -o src/ffi.rs
+  echo "Regenerated src/ffi.rs"
+else
+  echo "bindgen-cli not found; skipping bindings regeneration (cargo install --locked bindgen-cli)"
+fi
