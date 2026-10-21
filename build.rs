@@ -14,6 +14,5 @@ fn main() {
         .file("vendor/pdq/cpp/downscaling/downscaling.cpp")
         .compile("pdq-cpp");
 
-    println!("cargo:rerun-if-changed=vendor/pdq_wrapper.h");
-    println!("cargo:rerun-if-changed=vendor/pdq_wrapper.cpp");
+    println!("cargo:rerun-if-changed=vendor");
 }
