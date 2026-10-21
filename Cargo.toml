@@ -11,7 +11,10 @@ repository = "https://github.com/giddyos/pdq-rs"
 exclude = ["ThreatExchange/*"]
 
 [dependencies]
-image = "0.25.10"
+image = { version = "0.25.10", default-features = false }
+
+[dev-dependencies]
+image = { version = "0.25.10", default-features = false, features = ["jpeg"] }
 
 [build-dependencies]
 bindgen = "0.72.1"
